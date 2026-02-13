@@ -169,15 +169,17 @@
     phy-handle = <&phy4>;
 
     // Vendor SerDes / PLL Konfiguration
-    pll-data = <0x06000000 0x00000101 0x00001919>;
+    //pll-data = <0x06000000 0x00000101 0x00001919>;
+    pll-data = <0x06000000>;
     phy-mask = <0x10>;
-
-    // Erzwingt SerDes Init im Kernel
-    qca956x-serdes-fixup;
 
     // MAC-Adresse aus NVMEM
     nvmem-cells = <&macaddr_info_8 0>;
     nvmem-cell-names = "mac-address";
+
+
+    // Erzwingt SerDes Init im Kernel
+    qca956x-serdes-fixup;
 
 	gmac-config {
 		device = <&gmac>;
