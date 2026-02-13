@@ -21,6 +21,19 @@ define Device/tplink_re355-v1
 endef
 TARGET_DEVICES += tplink_re355-v1
 
+define Device/tplink_ap200-v1
+  SOC := qca9563
+  DEVICE_MODEL := AP200
+  DEVICE_VARIANT := v1
+  TPLINK_BOARD_ID := AP200
+  SUPPORTED_DEVICES := tplink,ap200
+  IMAGE_SIZE := 7680k
+
+  DEVICE_VARIANT := v1
+  DEVICE_VENDOR := TP-Link
+endef
+TARGET_DEVICES += tplink_ap200-v1
+
 define Device/tplink_re450-v1
   $(Device/tplink_rex5x-v1)
   DEVICE_MODEL := RE450
