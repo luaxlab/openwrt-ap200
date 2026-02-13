@@ -65,8 +65,6 @@
     };
 };
 
-/* ---------- SPI Flash und NVMEM ---------- */
-
 &spi {
     status = "okay";
 
@@ -106,7 +104,7 @@
 
             firmware: partition@20000 {
                 label = "firmware";
-                reg = <0x020000 0x7d0000>; /* bis vor ART */
+                reg = <0x020000 0x7d0000>;
                 compatible = "denx,uimage";
             };
 
@@ -133,17 +131,13 @@
     };
 };
 
-/* ---------- Ethernet ---------- */
-
 &pinmux {
 	mdio_pins: mdio_pins {
 		pinctrl-single,bits = <
             /* GPIO3 -> GE0_MDC */
             0x0  0x21000000 0xff000000
-
             /* GPIO4 -> GE0_MDO */
             0x4  0x00000020 0x000000ff
-
             /* GE0_MDI -> GPIO4 */
             0x24 0x00040000 0x00ff0000
         >;
@@ -168,17 +162,13 @@
     phy-mode = "sgmii";
     phy-handle = <&phy4>;
 
-    // Vendor SerDes / PLL Konfiguration
-    //pll-data = <0x06000000 0x00000101 0x00001919>;
     pll-data = <0x06000000>;
     phy-mask = <0x10>;
 
-    // MAC-Adresse aus NVMEM
     nvmem-cells = <&macaddr_info_8 0>;
     nvmem-cell-names = "mac-address";
 
 
-    // Erzwingt SerDes Init im Kernel
     qca956x-serdes-fixup;
 
 	gmac-config {
@@ -187,8 +177,17 @@
 
 };
 
+&pcie {
+	status = "okay";
 
-/* ---------- Wireless ---------- */
+	wifi@0,0 {
+		compatible = "qcom,ath10k";
+		reg = <0x0000 0 0 0 0>;
+		nvmem-cells = <&cal_art_5000>, <&macaddr_info_8 (-1)>;
+		nvmem-cell-names = "calibration", "mac-address";
+	};
+};
+
 
 &wmac {
     status = "okay";
