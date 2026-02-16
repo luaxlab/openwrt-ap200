@@ -83,7 +83,7 @@
 		};
 
         led {
-			label = "WPS button";
+			label = "LED button";
 			linux,code = <KEY_LIGHTS_TOGGLE>;
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 			debounce-interval = <60>;

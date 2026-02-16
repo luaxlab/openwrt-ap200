@@ -1,5 +1,22 @@
 include ./common-tp-link.mk
 
+define Device/tplink_ap200-v1
+  $(Device/tplink-safeloader-uimage)
+  SOC := qca9563
+  DEVICE_MODEL := AP200
+  DEVICE_VARIANT := v1
+  KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma
+  DEVICE_PACKAGES := kmod-ath10k-ct-smallbuffers ath10k-firmware-qca988x-ct
+  SUPPORTED_DEVICES := tplink,ap200
+  IMAGE_SIZE := 7744k
+  TPLINK_BOARD_ID := AP200-V1
+  DEVICE_TYPE=basic
+  DEVICE_VARIANT := v1
+  DEVICE_VENDOR := TP-Link
+#  IMAGE/sysupgrade.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | check-size | append-metadata
+endef
+TARGET_DEVICES += tplink_ap200-v1
+
 define Device/tplink_archer-a7-v5
   $(Device/tplink-safeloader-uimage)
   SOC := qca9563
